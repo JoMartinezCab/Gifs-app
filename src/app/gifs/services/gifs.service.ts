@@ -10,6 +10,7 @@ const GIPHY_API_URL = 'https://api.giphy.com/v1/gifs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class GifsService {
 
   public limitGifs = 9;
@@ -19,7 +20,9 @@ export class GifsService {
   private apiKey: string = GIPHY_API_KEY;
   private serviceUrl: string = GIPHY_API_URL;
 
-  constructor( private http: HttpClient ){ }
+  constructor( private http: HttpClient ){
+    this.loadLocalStorage();
+  }
 
   get tagsHistory(){
     return [...this._tagsHistory];
@@ -33,10 +36,27 @@ export class GifsService {
 
     this._tagsHistory.unshift(tag);
     this._tagsHistory = this._tagsHistory.splice(0, 10 );
+
+    this.saveLocalStorage();
+  }
+
+  private saveLocalStorage():void{
+    localStorage.setItem('history', JSON.stringify(this._tagsHistory)) ;
+  }
+
+  private loadLocalStorage():void{
+    let history = localStorage.getItem('history');
+
+    if(!history) return;
+
+    this._tagsHistory = JSON.parse(history);
+
+    if(this._tagsHistory.length > 0) this.searchTag(this._tagsHistory[0]);
   }
 
   public removeTag( tag:string ):void{
     this._tagsHistory = this._tagsHistory.filter((oldTag) => oldTag != tag );
+    this.saveLocalStorage();
   }
 
   public searchTag( tag:string ):void {
