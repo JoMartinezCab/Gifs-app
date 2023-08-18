@@ -35,7 +35,7 @@ export class GifsService {
 
 
     this._tagsHistory.unshift(tag);
-    this._tagsHistory = this._tagsHistory.splice(0, 10 );
+    this._tagsHistory = this._tagsHistory.splice(0, 6 );
 
     this.saveLocalStorage();
   }

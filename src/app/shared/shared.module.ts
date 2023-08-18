@@ -3,16 +3,19 @@ import { CommonModule } from '@angular/common';
 
 //Components
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { LazyImagesComponent } from './components/lazy-images/lazy-images.component';
 
 @NgModule({
   declarations: [
-    SidebarComponent
+    SidebarComponent,
+    LazyImagesComponent
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    SidebarComponent
+    SidebarComponent,
+    LazyImagesComponent
   ]
 })
 export class SharedModule { }
