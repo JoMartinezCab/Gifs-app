@@ -5,11 +5,21 @@
   <div class="list-group list-reset">
     <div
     *ngFor="let tag of tags"
-    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-      <span>
-        {{ tag | titlecase}}
-      </span>
-      <button type="button" class="btn btn-light">x</button>
+      class="
+        tag
+        list-group-item
+        list-group-item-action
+        d-flex justify-content-between
+        align-items-center"
+      (click)="searchByTag(tag)"
+    >
+      <span>{{ tag | titlecase }}</span>
+      <button
+        type="button"
+        class="btn btn-outline-danger"
+        (click)="removeTag(tag)">
+        x
+      </button>
     </div>
   </div>
 </div>
